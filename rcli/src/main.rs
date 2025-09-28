@@ -17,8 +17,7 @@ fn main() -> anyhow::Result<()> {
 
     match opts.cmd {
         SubCommand::Csv(opts) => {
-            let mut ret: Vec<People> = Vec::with_capacity(128);
-            process_csv(opts, &mut ret)?;
+            process_csv(opts)?;
         }
     }
 
