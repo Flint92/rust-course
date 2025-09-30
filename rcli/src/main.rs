@@ -4,6 +4,8 @@ use crate::process::base64_processor::{base64_decode, base64_encode};
 use clap::Parser;
 use process::csv_processor::process_csv;
 use serde::{Deserialize, Serialize};
+use crate::cli::http_opts::HttpSubCommand;
+use crate::process::http_processor;
 
 mod cli;
 mod process;
@@ -18,7 +20,10 @@ struct People {
     age: u8,
 }
 
-fn main() -> anyhow::Result<()> {
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    tracing_subscriber::fmt::init();
+
     let opts = Opts::parse();
 
     match opts.cmd {
@@ -31,6 +36,11 @@ fn main() -> anyhow::Result<()> {
             }
             Base64SubCommand::Decoder(opts) => {
                 base64_decode(opts)?;
+            }
+        },
+        SubCommand::Http(opts) => match opts {
+            HttpSubCommand::Serve(opts) => {
+                http_processor::serve(opts).await?;
             }
         },
     }
