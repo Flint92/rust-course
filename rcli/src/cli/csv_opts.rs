@@ -3,18 +3,6 @@ use std::fmt::{Display, Formatter};
 use std::path::Path;
 use std::str::FromStr;
 
-#[derive(Debug, Parser)]
-#[command(name = "rcli", version = "0.1.0", author = "Flint", about = "Rust CLI", long_about = None)]
-pub struct Opts {
-    #[command(subcommand)]
-    pub cmd: SubCommand,
-}
-
-#[derive(Debug, Parser)]
-pub enum SubCommand {
-    #[command(name = "csv", about = "Show or convert CSV to other formats")]
-    Csv(CsvOpts),
-}
 
 #[derive(Debug, Clone, Copy)]
 pub enum OutputFormat {

@@ -1,5 +1,7 @@
+use crate::cli::base64_opts::Base64SubCommand;
+use crate::cli::{Opts, SubCommand};
+use crate::process::base64_processor::{base64_decode, base64_encode};
 use clap::Parser;
-use cli::csv_opts::{Opts, SubCommand};
 use process::csv_processor::process_csv;
 use serde::{Deserialize, Serialize};
 
@@ -23,6 +25,14 @@ fn main() -> anyhow::Result<()> {
         SubCommand::Csv(opts) => {
             process_csv(opts)?;
         }
+        SubCommand::Base64(opts) => match opts {
+            Base64SubCommand::Encoder(opts) => {
+                base64_encode(opts)?;
+            }
+            Base64SubCommand::Decoder(opts) => {
+                base64_decode(opts)?;
+            }
+        },
     }
 
     Ok(())
