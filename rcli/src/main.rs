@@ -1,6 +1,10 @@
 use clap::Parser;
-use rcli::{Opts, SubCommand, process_csv};
+use cli::csv_opts::{Opts, SubCommand};
+use process::csv_processor::process_csv;
 use serde::{Deserialize, Serialize};
+
+mod cli;
+mod process;
 
 #[derive(Serialize, Deserialize, Debug)]
 struct People {

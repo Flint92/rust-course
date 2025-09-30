@@ -1,4 +1,4 @@
-use crate::opts::{CsvOpts, OutputFormat};
+use crate::cli::csv_opts::{CsvOpts, OutputFormat};
 use csv::Reader;
 use serde_json::Value;
 use std::collections::HashMap;
